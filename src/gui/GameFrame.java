@@ -12,7 +12,7 @@ public class GameFrame extends JFrame {
     private String loggedInUser;
     private GameLogic gameLogic;
     private UserService userService;
-    private JButton[] gridButtons;
+    private JButton[][] gridButtons;
 
     public GameFrame(String username) {
         this.loggedInUser = username;
@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
         this.userService = new UserService();
         
         setTitle("Connect Four - Game Board");
-        setSize(500, 500);
+        setSize(700, 600); // Made slightly larger for 6x7 grid
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -30,23 +30,26 @@ public class GameFrame extends JFrame {
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         add(headerLabel, BorderLayout.NORTH);
         
-        // 4x4 Grid
-        JPanel gridPanel = new JPanel(new GridLayout(4, 4));
-        gridButtons = new JButton[16];
+        // 6x7 Grid
+        JPanel gridPanel = new JPanel(new GridLayout(GameLogic.ROWS, GameLogic.COLS));
+        gridButtons = new JButton[GameLogic.ROWS][GameLogic.COLS];
         
-        for (int i = 0; i < 16; i++) {
-            final int index = i;
-            gridButtons[i] = new JButton("");
-            gridButtons[i].setFont(new Font("Arial", Font.BOLD, 40));
-            gridButtons[i].setFocusPainted(false);
-            
-            gridButtons[i].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    handlePlayerMove(index);
-                }
-            });
-            gridPanel.add(gridButtons[i]);
+        for (int row = 0; row < GameLogic.ROWS; row++) {
+            for (int col = 0; col < GameLogic.COLS; col++) {
+                gridButtons[row][col] = new JButton("");
+                gridButtons[row][col].setFont(new Font("Arial", Font.BOLD, 40));
+                gridButtons[row][col].setFocusPainted(false);
+                
+                // When any button in a column is clicked, drop token into that column
+                final int clickedCol = col;
+                gridButtons[row][col].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        handlePlayerMove(clickedCol);
+                    }
+                });
+                gridPanel.add(gridButtons[row][col]);
+            }
         }
         add(gridPanel, BorderLayout.CENTER);
         
@@ -64,21 +67,28 @@ public class GameFrame extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
     }
     
-    private void handlePlayerMove(int index) {
-        if (gameLogic.makeMove(index, 'X')) {
-            gridButtons[index].setText("X");
-            gridButtons[index].setEnabled(false);
+    private void handlePlayerMove(int col) {
+        int rowLanded = gameLogic.makeMove(col, 'X');
+        
+        if (rowLanded != -1) {
+            // Update the specific button where the token landed
+            gridButtons[rowLanded][col].setText("X");
+            // Optionally change color here to Red: gridButtons[rowLanded][col].setForeground(Color.RED);
             
             if (checkGameOver()) return;
             
             // Computer turn
-            int compMove = gameLogic.getComputerMove();
-            if (compMove != -1) {
-                gameLogic.makeMove(compMove, 'O');
-                gridButtons[compMove].setText("O");
-                gridButtons[compMove].setEnabled(false);
-                checkGameOver();
+            int compCol = gameLogic.getComputerMove();
+            if (compCol != -1) {
+                int compRowLanded = gameLogic.makeMove(compCol, 'O');
+                if (compRowLanded != -1) {
+                    gridButtons[compRowLanded][compCol].setText("O");
+                    checkGameOver();
+                }
             }
+        } else {
+            // Column is full
+            JOptionPane.showMessageDialog(this, "That column is full! Try another one.", "Invalid Move", JOptionPane.WARNING_MESSAGE);
         }
     }
     
@@ -86,7 +96,11 @@ public class GameFrame extends JFrame {
         char state = gameLogic.checkWinState();
         if (state != ' ') {
             // Disable all buttons
-            for (JButton btn : gridButtons) btn.setEnabled(false);
+            for (int row = 0; row < GameLogic.ROWS; row++) {
+                for (int col = 0; col < GameLogic.COLS; col++) {
+                    gridButtons[row][col].setEnabled(false);
+                }
+            }
             
             String message = "";
             if (state == 'X') {
