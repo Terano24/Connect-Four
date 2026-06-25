@@ -6,8 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenuFrame extends JFrame {
+    
+    private String loggedInUser;
 
-    public MainMenuFrame() {
+    public MainMenuFrame(String username) {
+        this.loggedInUser = username;
         setTitle("Connect Four - Main Menu");
         setSize(400, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +39,7 @@ public class MainMenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SwingUtilities.invokeLater(() -> new GameFrame().setVisible(true));
+                SwingUtilities.invokeLater(() -> new GameFrame(loggedInUser).setVisible(true));
             }
         });
         
@@ -44,7 +47,7 @@ public class MainMenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SwingUtilities.invokeLater(() -> new StatisticsFrame().setVisible(true));
+                SwingUtilities.invokeLater(() -> new StatisticsFrame(loggedInUser).setVisible(true));
             }
         });
         
@@ -52,7 +55,7 @@ public class MainMenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SwingUtilities.invokeLater(() -> new TopScorersFrame().setVisible(true));
+                SwingUtilities.invokeLater(() -> new TopScorersFrame(loggedInUser).setVisible(true));
             }
         });
         

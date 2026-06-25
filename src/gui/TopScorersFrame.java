@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TopScorersFrame extends JFrame {
-    public TopScorersFrame() {
+    private String loggedInUser;
+    
+    public TopScorersFrame(String username) {
+        this.loggedInUser = username;
         setTitle("Connect Four - Leaderboard");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,7 +26,7 @@ public class TopScorersFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SwingUtilities.invokeLater(() -> new MainMenuFrame().setVisible(true));
+                SwingUtilities.invokeLater(() -> new MainMenuFrame(loggedInUser).setVisible(true));
             }
         });
         

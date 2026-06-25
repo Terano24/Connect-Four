@@ -43,4 +43,34 @@ public class UserService {
         }
         return false;
     }
+
+    // Update player statistics after a game
+    public void updateStatistics(String username, boolean isWin, boolean isDraw) {
+        String query = "UPDATE users SET games_played = games_played + 1, " +
+                       "games_won = games_won + ?, " +
+                       "games_lost = games_lost + ?, " +
+                       "games_drawn = games_drawn + ?, " +
+                       "score = score + ? " +
+                       "WHERE username = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            int won = isWin ? 1 : 0;
+            int drawn = isDraw ? 1 : 0;
+            int lost = (!isWin && !isDraw) ? 1 : 0;
+            int scoreAdd = isWin ? 3 : (isDraw ? 1 : 0);
+            
+            stmt.setInt(1, won);
+            stmt.setInt(2, lost);
+            stmt.setInt(3, drawn);
+            stmt.setInt(4, scoreAdd);
+            stmt.setString(5, username);
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Database error during statistics update: " + e.getMessage());
+        }
+    }
 }

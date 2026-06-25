@@ -78,7 +78,7 @@ public class LoginFrame extends JFrame {
             
             // Open Main Menu
             SwingUtilities.invokeLater(() -> {
-                new MainMenuFrame().setVisible(true);
+                new MainMenuFrame(username).setVisible(true);
             });
         } else {
             JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Failed", JOptionPane.ERROR_MESSAGE);
