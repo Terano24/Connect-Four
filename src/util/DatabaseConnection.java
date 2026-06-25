@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     // Database credentials and URL
-    private static final String URL = "jdbc:mysql://localhost:3306/game_project";
+    private static final String URL = "jdbc:mysql://localhost:3307/game_project";
     private static final String USER = "bn_processmaker";
     private static final String PASS = "5659ecd8ab";
 
