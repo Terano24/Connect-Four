@@ -1,9 +1,9 @@
-# Simple Tic-Tac-Toe Game with Java Swing, Login, and Statistics
+e# Simple Tic-Tac-Toe Game with Java Swing, Login, and Statistics
 
 ## Student Information
-Name: [Your Name]
-Student ID: [Your Student ID]
-Class: [Your Class]
+Name: I Nyoman Agung Ananda Terano
+Student ID: 5026251030
+Class: E
 
 ## Project Description
 This project is a simple Tic-Tac-Toe game built using Java Swing. The application includes login, game statistics, and Top 5 scorer feature. It connects to a single-table MySQL database using JDBC to persist player data and scores.
