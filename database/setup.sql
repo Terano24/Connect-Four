@@ -1,13 +1,16 @@
--- Database: game_project
+CREATE DATABASE IF NOT EXISTS game_project;
 
--- Create the users table to handle both credentials and game statistics
-CREATE TABLE IF NOT EXISTS users (
+USE game_project;
+
+DROP TABLE IF EXISTS players;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE players (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    games_played INT DEFAULT 0,
-    games_won INT DEFAULT 0,
-    games_lost INT DEFAULT 0,
-    games_drawn INT DEFAULT 0,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    wins INT DEFAULT 0,
+    losses INT DEFAULT 0,
+    draws INT DEFAULT 0,
     score INT DEFAULT 0
 );
