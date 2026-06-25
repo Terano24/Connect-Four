@@ -1,13 +1,11 @@
-import java.sql.Connection;
-import util.DatabaseConnection;
+import gui.LoginFrame;
+import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Testing Database Connection...");
-        Connection conn = DatabaseConnection.getConnection();
-        
-        if (conn != null) {
-            DatabaseConnection.closeConnection(conn);
-        }
+        SwingUtilities.invokeLater(() -> {
+            LoginFrame loginFrame = new LoginFrame();
+            loginFrame.setVisible(true);
+        });
     }
 }
