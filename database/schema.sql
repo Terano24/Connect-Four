@@ -1,9 +1,6 @@
-CREATE DATABASE IF NOT EXISTS game_project;
+CREATE DATABASE game_project;
 
 USE game_project;
-
-DROP TABLE IF EXISTS players;
-DROP TABLE IF EXISTS users;
 
 CREATE TABLE players (
     id INT AUTO_INCREMENT PRIMARY KEY,
