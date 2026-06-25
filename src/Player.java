@@ -21,4 +21,9 @@ public class Player {
     public int getLosses() { return losses; }
     public int getDraws() { return draws; }
     public int getScore() { return score; }
+
+    public void setWins(int wins) { this.wins = wins; }
+    public void setLosses(int losses) { this.losses = losses; }
+    public void setDraws(int draws) { this.draws = draws; }
+    public void setScore(int score) { this.score = score; }
 }

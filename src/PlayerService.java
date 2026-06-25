@@ -52,13 +52,18 @@ public class PlayerService {
         if (result.equalsIgnoreCase("WIN")) {
             additionalScore = 10;
             sql = "UPDATE players SET wins = wins + 1, score = score + ? WHERE id = ?";
+            player.setWins(player.getWins() + 1);
         } else if (result.equalsIgnoreCase("LOSE")) {
             additionalScore = 0;
             sql = "UPDATE players SET losses = losses + 1, score = score + ? WHERE id = ?";
+            player.setLosses(player.getLosses() + 1);
         } else if (result.equalsIgnoreCase("DRAW")) {
             additionalScore = 3;
             sql = "UPDATE players SET draws = draws + 1, score = score + ? WHERE id = ?";
+            player.setDraws(player.getDraws() + 1);
         }
+        
+        player.setScore(player.getScore() + additionalScore);
 
         try {
             Connection conn = DatabaseManager.getConnection();
