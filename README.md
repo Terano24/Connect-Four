@@ -39,10 +39,11 @@ StatisticsFrame: Swing window for showing personal statistics of the currently l
 TopScorersFrame: Swing window for showing Top 5 scorers using a JTable parsed directly from the database.
 
 ## Screenshots
-*(Add screenshots here)*
-- `screenshots/login-window.png`
-- `screenshots/game-window.png`
-- `screenshots/top-scorers-window.png`
+<img width="512" height="565" alt="Screenshot 2026-06-27 001648" src="https://github.com/user-attachments/assets/ae033fd6-8e9f-4c27-8c9f-3b61594a162c" />
+<img width="441" height="256" alt="Screenshot 2026-06-27 001608" src="https://github.com/user-attachments/assets/7ed2c0d0-adbd-4b44-be10-c3da150e6e95" />
+<img width="610" height="367" alt="Screenshot 2026-06-27 001755" src="https://github.com/user-attachments/assets/81911c9f-c2e9-4ebb-ad74-b6498f630233" />
+
+
 
 ## Video Link
-YouTube: [Insert your YouTube video link here]
+YouTube: https://youtu.be/U-CxEKAtuAE
