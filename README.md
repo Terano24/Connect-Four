@@ -2,7 +2,9 @@ e# Simple Tic-Tac-Toe Game with Java Swing, Login, and Statistics
 
 ## Student Information
 Name: I Nyoman Agung Ananda Terano
+
 Student ID: 5026251030
+
 Class: E
 
 ## Project Description
